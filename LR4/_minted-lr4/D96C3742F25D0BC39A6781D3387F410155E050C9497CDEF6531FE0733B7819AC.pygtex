@@ -1,0 +1,41 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{DATA}\PYG{+w}{ }\PYG{n+no}{SEGMENT}
+\PYG{+w}{    }\PYG{n+nf}{CR}\PYG{+w}{ }\PYG{n+no}{EQU}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{n+no}{DH}
+\PYG{+w}{    }\PYG{n+nf}{LF}\PYG{+w}{ }\PYG{n+no}{EQU}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{n+no}{AH}
+\PYG{+w}{    }\PYG{n+nf}{MSG1}\PYG{+w}{ }\PYG{n+no}{DB}\PYG{+w}{ }\PYG{n+no}{CR}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{LF}\PYG{p}{,}\PYG{+w}{ }\PYG{err}{\PYGZdq{}}\PYG{n+no}{Enter}\PYG{+w}{ }\PYG{n+no}{the}\PYG{+w}{ }\PYG{n+no}{HEX}\PYG{+w}{ }\PYG{n+no}{number}\PYG{+w}{ }\PYG{p}{:}\PYG{+w}{ }\PYG{n+no}{\PYGZdl{}}\PYG{err}{\PYGZdq{}}
+\PYG{+w}{    }\PYG{n+nf}{MSG2}\PYG{+w}{ }\PYG{n+no}{DB}\PYG{+w}{ }\PYG{n+no}{CR}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{LF}\PYG{p}{,}\PYG{+w}{ }\PYG{err}{\PYGZdq{}}\PYG{n+no}{In}\PYG{+w}{ }\PYG{n+no}{decimal}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{n+no}{\PYGZdl{}}\PYG{err}{\PYGZdq{}}
+\PYG{+w}{    }\PYG{n+nf}{NUM}\PYG{+w}{ }\PYG{n+no}{DB}\PYG{+w}{ }\PYG{err}{?}
+\PYG{+w}{    }\PYG{n+nf}{DEC\PYGZus{}NUM}\PYG{+w}{ }\PYG{n+no}{DB}\PYG{+w}{ }\PYG{err}{?}
+\PYG{n+nf}{DATA}\PYG{+w}{ }\PYG{n+no}{ENDS}
+
+\PYG{n+nf}{CODE}\PYG{+w}{ }\PYG{n+no}{SEGMENT}
+\PYG{+w}{    }\PYG{n+nf}{ASSUME}\PYG{+w}{ }\PYG{n+no}{CS}\PYG{p}{:}\PYG{n+no}{CODE}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{DS}\PYG{+w}{ }\PYG{n+no}{DATA}
+
+\PYG{n+nl}{START:}
+\PYG{+w}{    }\PYG{n+nf}{MOV}\PYG{+w}{ }\PYG{n+no}{AX}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{DATA}
+\PYG{+w}{    }\PYG{n+nf}{MOV}\PYG{+w}{ }\PYG{n+no}{DS}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{AX}
+
+\PYG{+w}{    }\PYG{n+nf}{LEA}\PYG{+w}{ }\PYG{n+no}{DX}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{MSG1}
+\PYG{+w}{    }\PYG{n+nf}{MOV}\PYG{+w}{ }\PYG{n+no}{AH}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{9}
+\PYG{+w}{    }\PYG{n+nf}{INT}\PYG{+w}{ }\PYG{l+m+mi}{21}\PYG{n+no}{H}
+
+\PYG{+w}{    }\PYG{n+nf}{MOV}\PYG{+w}{ }\PYG{n+no}{AH}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{1}
+\PYG{+w}{    }\PYG{n+nf}{INT}\PYG{+w}{ }\PYG{l+m+mi}{21}\PYG{n+no}{H}
+\PYG{+w}{    }\PYG{n+nf}{MOV}\PYG{+w}{ }\PYG{n+no}{NUM}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{AL}
+
+\PYG{+w}{    }\PYG{n+nf}{SUB}\PYG{+w}{ }\PYG{n+no}{NUM}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{11}\PYG{n+no}{H}
+
+\PYG{+w}{    }\PYG{n+nf}{LEA}\PYG{+w}{ }\PYG{n+no}{DX}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{MSG2}
+\PYG{+w}{    }\PYG{n+nf}{MOV}\PYG{+w}{ }\PYG{n+no}{AH}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{9}
+\PYG{+w}{    }\PYG{n+nf}{INT}\PYG{+w}{ }\PYG{l+m+mi}{21}\PYG{n+no}{H}
+
+\PYG{+w}{    }\PYG{n+nf}{MOV}\PYG{+w}{ }\PYG{n+no}{DL}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{NUM}
+
+\PYG{+w}{    }\PYG{n+nf}{MOV}\PYG{+w}{ }\PYG{n+no}{AH}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{02}\PYG{n+no}{H}
+\PYG{+w}{    }\PYG{n+nf}{INT}\PYG{+w}{ }\PYG{l+m+mi}{21}\PYG{n+no}{H}
+
+\PYG{+w}{    }\PYG{n+nf}{MOV}\PYG{+w}{ }\PYG{n+no}{AH}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{4}\PYG{n+no}{CH}
+\PYG{+w}{    }\PYG{n+nf}{INT}\PYG{+w}{ }\PYG{l+m+mi}{21}\PYG{n+no}{H}
+\PYG{n+nf}{CODE}\PYG{+w}{ }\PYG{n+no}{ENDS}
+\PYG{n+nf}{END}\PYG{+w}{ }\PYG{n+no}{START}
+\end{Verbatim}

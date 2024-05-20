@@ -1,0 +1,46 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{DATA}\PYG{+w}{ }\PYG{n}{SEGMENT}
+\PYG{+w}{    }\PYG{n}{MSG1}\PYG{+w}{ }\PYG{n}{DB}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}The max number is: \PYGZdq{}}
+\PYG{+w}{    }\PYG{n}{ANS}\PYG{+w}{ }\PYG{n}{DB}\PYG{+w}{ }\PYG{p}{?,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}\PYGZdl{}\PYGZsq{}}
+\PYG{n}{DATA}\PYG{+w}{ }\PYG{n}{ENDS}
+
+\PYG{n}{CODE}\PYG{+w}{ }\PYG{n}{SEGMENT}
+\PYG{+w}{    }\PYG{n}{ASSUME}\PYG{+w}{ }\PYG{n}{CS}\PYG{p}{:}\PYG{n}{CODE}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{DS}\PYG{+w}{ }\PYG{n}{DATA}
+
+\PYG{n}{START}\PYG{p}{:}
+\PYG{+w}{    }\PYG{n}{MOV}\PYG{+w}{ }\PYG{n}{AX}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{DATA}
+\PYG{+w}{    }\PYG{n}{MOV}\PYG{+w}{ }\PYG{n}{DS}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{AX}
+
+\PYG{+w}{    }\PYG{n}{MOV}\PYG{+w}{ }\PYG{n}{AX}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}8\PYGZsq{}}
+\PYG{+w}{    }\PYG{n}{MOV}\PYG{+w}{ }\PYG{n}{BX}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}3\PYGZsq{}}
+\PYG{+w}{    }\PYG{n}{MOV}\PYG{+w}{ }\PYG{n}{CX}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}6\PYGZsq{}}
+
+\PYG{+w}{    }\PYG{n}{CMP}\PYG{+w}{ }\PYG{n}{AX}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{BX}
+\PYG{+w}{    }\PYG{n}{JG}\PYG{+w}{ }\PYG{n}{CHK1}
+
+\PYG{+w}{    }\PYG{n}{MOV}\PYG{+w}{ }\PYG{n}{DX}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{BX}
+\PYG{+w}{    }\PYG{n}{JMP}\PYG{+w}{ }\PYG{n}{NXT1}
+
+\PYG{n}{CHK1}\PYG{p}{:}
+\PYG{+w}{    }\PYG{n}{MOV}\PYG{+w}{ }\PYG{n}{DX}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{AX}
+
+\PYG{n}{NXT1}\PYG{p}{:}
+\PYG{+w}{    }\PYG{n}{CMP}\PYG{+w}{ }\PYG{n}{DX}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{CX}
+\PYG{+w}{    }\PYG{n}{JG}\PYG{+w}{ }\PYG{n}{CHK2}
+\PYG{+w}{    }\PYG{n}{MOV}\PYG{+w}{ }\PYG{n}{AX}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{CX}
+\PYG{+w}{    }\PYG{n}{JMP}\PYG{+w}{ }\PYG{n}{NXT2}
+
+\PYG{n}{CHK2}\PYG{p}{:}
+\PYG{+w}{    }\PYG{n}{MOV}\PYG{+w}{ }\PYG{n}{AX}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{DX}
+
+\PYG{n}{NXT2}\PYG{p}{:}
+\PYG{+w}{    }\PYG{n}{MOV}\PYG{+w}{ }\PYG{n}{ANS}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{AL}
+\PYG{+w}{    }\PYG{n}{LEA}\PYG{+w}{ }\PYG{n}{DX}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{MSG1}
+\PYG{+w}{    }\PYG{n}{MOV}\PYG{+w}{ }\PYG{n}{AH}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{9}
+\PYG{+w}{    }\PYG{n}{INT}\PYG{+w}{ }\PYG{l+m+mi}{21}\PYG{n}{H}
+\PYG{+w}{    }\PYG{n}{MOV}\PYG{+w}{ }\PYG{n}{AH}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{4}\PYG{n}{CH}
+\PYG{+w}{    }\PYG{n}{INT}\PYG{+w}{ }\PYG{l+m+mi}{21}\PYG{n}{H}
+
+\PYG{n}{CODE}\PYG{+w}{ }\PYG{n}{ENDS}
+\PYG{n}{END}\PYG{+w}{ }\PYG{n}{START}
+\end{Verbatim}

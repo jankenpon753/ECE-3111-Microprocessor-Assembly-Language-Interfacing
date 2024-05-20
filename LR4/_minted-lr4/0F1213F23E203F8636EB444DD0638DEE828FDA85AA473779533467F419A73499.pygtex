@@ -1,0 +1,46 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{err}{DATA}\PYG{+w}{ }\PYG{err}{SEGMENT}
+\PYG{+w}{    }\PYG{err}{MSG1}\PYG{+w}{ }\PYG{err}{DB}\PYG{+w}{ }\PYG{err}{\PYGZdq{}The}\PYG{+w}{ }\PYG{err}{max}\PYG{+w}{ }\PYG{err}{number}\PYG{+w}{ }\PYG{n+nl}{is:}\PYG{+w}{ }\PYG{err}{\PYGZdq{}}
+\PYG{+w}{    }\PYG{err}{ANS}\PYG{+w}{ }\PYG{err}{DB}\PYG{+w}{ }\PYG{err}{?,}\PYG{+w}{ }\PYG{err}{\PYGZsq{}\PYGZdl{}\PYGZsq{}}
+\PYG{err}{DATA}\PYG{+w}{ }\PYG{err}{ENDS}
+
+\PYG{err}{CODE}\PYG{+w}{ }\PYG{err}{SEGMENT}
+\PYG{+w}{    }\PYG{err}{ASSUME}\PYG{+w}{ }\PYG{n+nl}{CS:}\PYG{err}{CODE,}\PYG{+w}{ }\PYG{err}{DS}\PYG{+w}{ }\PYG{err}{DATA}
+
+\PYG{n+nl}{START:}
+\PYG{+w}{    }\PYG{err}{MOV}\PYG{+w}{ }\PYG{err}{AX,}\PYG{+w}{ }\PYG{err}{DATA}
+\PYG{+w}{    }\PYG{err}{MOV}\PYG{+w}{ }\PYG{err}{DS,}\PYG{+w}{ }\PYG{err}{AX}
+
+\PYG{+w}{    }\PYG{err}{MOV}\PYG{+w}{ }\PYG{err}{AX,}\PYG{+w}{ }\PYG{err}{\PYGZsq{}8\PYGZsq{}}
+\PYG{+w}{    }\PYG{err}{MOV}\PYG{+w}{ }\PYG{err}{BX,}\PYG{+w}{ }\PYG{err}{\PYGZsq{}3\PYGZsq{}}
+\PYG{+w}{    }\PYG{err}{MOV}\PYG{+w}{ }\PYG{err}{CX,}\PYG{+w}{ }\PYG{err}{\PYGZsq{}6\PYGZsq{}}
+
+\PYG{+w}{    }\PYG{err}{CMP}\PYG{+w}{ }\PYG{err}{AX,}\PYG{+w}{ }\PYG{err}{BX}
+\PYG{+w}{    }\PYG{err}{JG}\PYG{+w}{ }\PYG{err}{CHK1}
+
+\PYG{+w}{    }\PYG{err}{MOV}\PYG{+w}{ }\PYG{err}{DX,}\PYG{+w}{ }\PYG{err}{BX}
+\PYG{+w}{    }\PYG{err}{JMP}\PYG{+w}{ }\PYG{err}{NXT1}
+
+\PYG{n+nl}{CHK1:}
+\PYG{+w}{    }\PYG{err}{MOV}\PYG{+w}{ }\PYG{err}{DX,}\PYG{+w}{ }\PYG{err}{AX}
+
+\PYG{n+nl}{NXT1:}
+\PYG{+w}{    }\PYG{err}{CMP}\PYG{+w}{ }\PYG{err}{DX,}\PYG{+w}{ }\PYG{err}{CX}
+\PYG{+w}{    }\PYG{err}{JG}\PYG{+w}{ }\PYG{err}{CHK2}
+\PYG{+w}{    }\PYG{err}{MOV}\PYG{+w}{ }\PYG{err}{AX,}\PYG{+w}{ }\PYG{err}{CX}
+\PYG{+w}{    }\PYG{err}{JMP}\PYG{+w}{ }\PYG{err}{NXT2}
+
+\PYG{n+nl}{CHK2:}
+\PYG{+w}{    }\PYG{err}{MOV}\PYG{+w}{ }\PYG{err}{AX,}\PYG{+w}{ }\PYG{err}{DX}
+
+\PYG{n+nl}{NXT2:}
+\PYG{+w}{    }\PYG{err}{MOV}\PYG{+w}{ }\PYG{err}{ANS,}\PYG{+w}{ }\PYG{err}{AL}
+\PYG{+w}{    }\PYG{err}{LEA}\PYG{+w}{ }\PYG{err}{DX,}\PYG{+w}{ }\PYG{err}{MSG1}
+\PYG{+w}{    }\PYG{err}{MOV}\PYG{+w}{ }\PYG{err}{AH,}\PYG{+w}{ }\PYG{err}{9}
+\PYG{+w}{    }\PYG{n+nf}{INT}\PYG{+w}{ }\PYG{l+m+mi}{21}\PYG{n+nl}{H}
+\PYG{+w}{    }\PYG{err}{MOV}\PYG{+w}{ }\PYG{err}{AH,}\PYG{+w}{ }\PYG{err}{4CH}
+\PYG{+w}{    }\PYG{n+nf}{INT}\PYG{+w}{ }\PYG{l+m+mi}{21}\PYG{n+nl}{H}
+
+\PYG{err}{CODE}\PYG{+w}{ }\PYG{err}{ENDS}
+\PYG{err}{END}\PYG{+w}{ }\PYG{err}{START}
+\end{Verbatim}

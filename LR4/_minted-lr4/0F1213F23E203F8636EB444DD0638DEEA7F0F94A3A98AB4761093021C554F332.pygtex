@@ -1,0 +1,46 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{x}{DATA SEGMENT}
+\PYG{x}{    MSG1 DB \PYGZdq{}The max number is: \PYGZdq{}}
+\PYG{x}{    ANS DB ?, \PYGZsq{}\PYGZdl{}\PYGZsq{}}
+\PYG{x}{DATA ENDS}
+
+\PYG{x}{CODE SEGMENT}
+\PYG{x}{    ASSUME CS:CODE, DS DATA}
+
+\PYG{x}{START:}
+\PYG{x}{    MOV AX, DATA}
+\PYG{x}{    MOV DS, AX}
+
+\PYG{x}{    MOV AX, \PYGZsq{}8\PYGZsq{}}
+\PYG{x}{    MOV BX, \PYGZsq{}3\PYGZsq{}}
+\PYG{x}{    MOV CX, \PYGZsq{}6\PYGZsq{}}
+
+\PYG{x}{    CMP AX, BX}
+\PYG{x}{    JG CHK1}
+
+\PYG{x}{    MOV DX, BX}
+\PYG{x}{    JMP NXT1}
+
+\PYG{x}{CHK1:}
+\PYG{x}{    MOV DX, AX}
+
+\PYG{x}{NXT1:}
+\PYG{x}{    CMP DX, CX}
+\PYG{x}{    JG CHK2}
+\PYG{x}{    MOV AX, CX}
+\PYG{x}{    JMP NXT2}
+
+\PYG{x}{CHK2:}
+\PYG{x}{    MOV AX, DX}
+
+\PYG{x}{NXT2:}
+\PYG{x}{    MOV ANS, AL}
+\PYG{x}{    LEA DX, MSG1}
+\PYG{x}{    MOV AH, 9}
+\PYG{x}{    INT 21H}
+\PYG{x}{    MOV AH, 4CH}
+\PYG{x}{    INT 21H}
+
+\PYG{x}{CODE ENDS}
+\PYG{x}{END START}
+\end{Verbatim}

@@ -1,0 +1,60 @@
+\clearpage
+\title{Conversion From Uppercase to Lowercase.}
+\author{}
+\date{}
+\maketitle
+
+\section*{Tools Used}
+\begin{itemize}
+    \item emu8086 - 8086 Microprocessor Emulator
+    \item MacTeX -\LaTeX  compiler.
+    \item VS Code with \LaTeX workshop extension as a text editor.
+\end{itemize}
+
+\section*{Process}
+
+\subsection*{Code:}
+\begin{minted}[breaklines, linenos]{gas}
+    DATA    SEGMENT
+    CR EQU 0DH
+    LF EQU 0AH
+    MSG1 DB 'ENTER A UPPERCASE LETTER: $'
+    MSG2 DB CR,LF, 'IN LOWERCASE IT IS: '
+    CHAR DB ?, '$'
+DATA    ENDS
+CODE    SEGMENT
+    ASSUME CS:CODE, DS:DATA
+    
+START:  
+    MOV AX, DATA
+    MOV DS, AX
+          
+    LEA DX, MSG1
+    MOV AH, 9
+    INT 21h
+    MOV AH, 1
+    INT 21h
+    
+    ADD AL, 20H
+    MOV CHAR, AL
+        
+    LEA DX,MSG2
+    MOV AH, 9
+    INT 21h
+
+    MOV AH, 4CH
+    INT 21h    
+     
+CODE    ENDS
+
+END START
+\end{minted}
+
+\subsection*{Output}
+\begin{center}
+    \centering
+    \includegraphics[width = .8\textwidth]{MALI2.jpg}
+    \captionof{figure}{Uppercase to Lowercase}
+\end{center}
+
+

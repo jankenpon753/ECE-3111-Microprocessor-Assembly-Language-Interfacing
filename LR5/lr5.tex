@@ -1,0 +1,37 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper, total={6in, 8.5in}]{geometry}
+\usepackage{graphicx}
+\graphicspath{ {images/output/} }
+\usepackage{amsmath}
+\usepackage{minted}
+\usepackage{multicol}
+\usepackage{caption}
+\usepackage[english]{babel}
+\usepackage{placeins}
+\usepackage{titling}
+
+
+\begin{document}
+\input{omaer_sir_cover.tex}
+\input{lrp5_1.tex}
+\input{lrp5_2.tex}
+
+\section*{Keywords}
+These are the new keywords learned while solving the Problems
+\begin{description}
+    \item[EQU] Used to declare a variable as a constant.
+    \item[XOR] Used to perform Exclusive-OR operation over each bit in a byte/word with the corresponding bit in another byte/word. Used here on the same variable to clear the register.
+    \item[AND] Used for adding each bit in a byte/word with the corresponding bit in another byte/word.
+    \item[OR] Used to multiply each bit in a byte/word with the corresponding bit in another byte/word.
+    \item[JE] Used to jump if equal/zero flag ZF = 1
+    \item[SHL] Used to shift bits of a byte/word towards left and put zero(S) in LSBs.
+    \item[RCL] Used to rotate bits of byte/word towards the left, i.e. MSB to CF and CF to LSB.
+    \item[JC] Used to jump if carry flag CF = 1
+    \item[JNC] Used to jump if no carry flag (CF = 0)
+    \item[SHR] Used to shift bits of a byte/word towards the right and put zero(S) in MSBs.
+    \item[ROL] Used to rotate bits of byte/word towards the left, i.e. MSB to LSB and to Carry Flag [CF].
+    \item[JL] Used to jump if less than/not greater than/equal instruction satisfies.
+    \item[JGE]  Used to jump if greater than/equal/not less than instruction satisfies.
+\end{description}
+
+\end{document}

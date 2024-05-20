@@ -1,0 +1,46 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{err}{DATA}\PYG{+w}{ }\PYG{err}{SEGMENT}
+\PYG{+w}{    }\PYG{err}{MSG}\PYG{l+m+mi}{1}\PYG{+w}{ }\PYG{err}{DB}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}The max number is: \PYGZdq{}}
+\PYG{+w}{    }\PYG{err}{ANS}\PYG{+w}{ }\PYG{err}{DB}\PYG{+w}{ }\PYG{err}{?}\PYG{p}{,}\PYG{+w}{ }\PYG{err}{\PYGZsq{}\PYGZdl{}\PYGZsq{}}
+\PYG{err}{DATA}\PYG{+w}{ }\PYG{err}{ENDS}
+
+\PYG{err}{CODE}\PYG{+w}{ }\PYG{err}{SEGMENT}
+\PYG{+w}{    }\PYG{err}{ASSUME}\PYG{+w}{ }\PYG{err}{CS}\PYG{p}{:}\PYG{err}{CODE}\PYG{p}{,}\PYG{+w}{ }\PYG{err}{DS}\PYG{+w}{ }\PYG{err}{DATA}
+
+\PYG{err}{START}\PYG{p}{:}
+\PYG{+w}{    }\PYG{err}{MOV}\PYG{+w}{ }\PYG{err}{AX}\PYG{p}{,}\PYG{+w}{ }\PYG{err}{DATA}
+\PYG{+w}{    }\PYG{err}{MOV}\PYG{+w}{ }\PYG{err}{DS}\PYG{p}{,}\PYG{+w}{ }\PYG{err}{AX}
+
+\PYG{+w}{    }\PYG{err}{MOV}\PYG{+w}{ }\PYG{err}{AX}\PYG{p}{,}\PYG{+w}{ }\PYG{err}{\PYGZsq{}}\PYG{l+m+mi}{8}\PYG{err}{\PYGZsq{}}
+\PYG{+w}{    }\PYG{err}{MOV}\PYG{+w}{ }\PYG{err}{BX}\PYG{p}{,}\PYG{+w}{ }\PYG{err}{\PYGZsq{}}\PYG{l+m+mi}{3}\PYG{err}{\PYGZsq{}}
+\PYG{+w}{    }\PYG{err}{MOV}\PYG{+w}{ }\PYG{err}{CX}\PYG{p}{,}\PYG{+w}{ }\PYG{err}{\PYGZsq{}}\PYG{l+m+mi}{6}\PYG{err}{\PYGZsq{}}
+
+\PYG{+w}{    }\PYG{err}{CMP}\PYG{+w}{ }\PYG{err}{AX}\PYG{p}{,}\PYG{+w}{ }\PYG{err}{BX}
+\PYG{+w}{    }\PYG{err}{JG}\PYG{+w}{ }\PYG{err}{CHK}\PYG{l+m+mi}{1}
+
+\PYG{+w}{    }\PYG{err}{MOV}\PYG{+w}{ }\PYG{err}{DX}\PYG{p}{,}\PYG{+w}{ }\PYG{err}{BX}
+\PYG{+w}{    }\PYG{err}{JMP}\PYG{+w}{ }\PYG{err}{NXT}\PYG{l+m+mi}{1}
+
+\PYG{err}{CHK}\PYG{l+m+mi}{1}\PYG{p}{:}
+\PYG{+w}{    }\PYG{err}{MOV}\PYG{+w}{ }\PYG{err}{DX}\PYG{p}{,}\PYG{+w}{ }\PYG{err}{AX}
+
+\PYG{err}{NXT}\PYG{l+m+mi}{1}\PYG{p}{:}
+\PYG{+w}{    }\PYG{err}{CMP}\PYG{+w}{ }\PYG{err}{DX}\PYG{p}{,}\PYG{+w}{ }\PYG{err}{CX}
+\PYG{+w}{    }\PYG{err}{JG}\PYG{+w}{ }\PYG{err}{CHK}\PYG{l+m+mi}{2}
+\PYG{+w}{    }\PYG{err}{MOV}\PYG{+w}{ }\PYG{err}{AX}\PYG{p}{,}\PYG{+w}{ }\PYG{err}{CX}
+\PYG{+w}{    }\PYG{err}{JMP}\PYG{+w}{ }\PYG{err}{NXT}\PYG{l+m+mi}{2}
+
+\PYG{err}{CHK}\PYG{l+m+mi}{2}\PYG{p}{:}
+\PYG{+w}{    }\PYG{err}{MOV}\PYG{+w}{ }\PYG{err}{AX}\PYG{p}{,}\PYG{+w}{ }\PYG{err}{DX}
+
+\PYG{err}{NXT}\PYG{l+m+mi}{2}\PYG{p}{:}
+\PYG{+w}{    }\PYG{err}{MOV}\PYG{+w}{ }\PYG{err}{ANS}\PYG{p}{,}\PYG{+w}{ }\PYG{err}{AL}
+\PYG{+w}{    }\PYG{err}{LEA}\PYG{+w}{ }\PYG{err}{DX}\PYG{p}{,}\PYG{+w}{ }\PYG{err}{MSG}\PYG{l+m+mi}{1}
+\PYG{+w}{    }\PYG{err}{MOV}\PYG{+w}{ }\PYG{err}{AH}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{9}
+\PYG{+w}{    }\PYG{err}{INT}\PYG{+w}{ }\PYG{l+m+mi}{21}\PYG{err}{H}
+\PYG{+w}{    }\PYG{err}{MOV}\PYG{+w}{ }\PYG{err}{AH}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{4}\PYG{err}{CH}
+\PYG{+w}{    }\PYG{err}{INT}\PYG{+w}{ }\PYG{l+m+mi}{21}\PYG{err}{H}
+
+\PYG{err}{CODE}\PYG{+w}{ }\PYG{err}{ENDS}
+\PYG{err}{END}\PYG{+w}{ }\PYG{err}{START}
+\end{Verbatim}
