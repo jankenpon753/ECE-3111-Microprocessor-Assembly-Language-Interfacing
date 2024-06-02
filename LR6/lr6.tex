@@ -1,0 +1,31 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper, total={6in, 8.5in}]{geometry}
+\usepackage{graphicx}
+\graphicspath{ {images/output/} }
+\usepackage{amsmath}
+\usepackage{minted}
+\usepackage{multicol}
+\usepackage{caption}
+\usepackage[english]{babel}
+\usepackage{placeins}
+\usepackage{titling}
+
+
+\begin{document}
+\input{omaer_sir_cover.tex}
+\input{lrp6_1.tex}
+\input{lrp6_2.tex}
+\input{lrp6_3.tex}
+
+\pagebreak
+\section*{Keywords}
+These are the new keywords learned while solving the Problems
+\begin{description}
+    \item[PUSH] Used to put a word at the top of the stack.
+    \item[POP] Used to get a word from the top of the stack to the provided location.
+    \item[XCHG] Used to exchange the data from two locations.
+    \item[CALL] Used to call a procedure and save their return address to the stack.
+    \item[RET] Used to return from the procedure to the main program.
+\end{description}
+
+\end{document}
