@@ -1,25 +1,63 @@
 \clearpage
-\title{Problem 6.2}
+\title{Problem 7.3}
 \author{}
 \date{}
 \maketitle
 
 \section*{Problem Description}
+Create and define two segments in memory, then exchange the contents of data segment and code segment.
 
 \section*{Process}
 \subsection*{Code:}
 
 \begin{multicols}{2}{|}
     \begin{minted}[linenos,breaklines,breakanywhere]{nasm}
+DATA SEGMENT
+    ARR DB 1, 2, 3, 4, 5, 6, 7, 8
+DATA ENDS
 
+CODE SEGMENT
+    ASSUME DS:DATA, CS:CODE
+
+START:
+    MOV AX, DATA
+    MOV DS, AX
+    
+    MOV AX, 9000H
+    MOV ES, AX
+    
+    MOV CX, 8
+    MOV SI, 0
+    MOV DI, SI
+
+SWAP:
+    MOV AL, [SI]
+    XCHG ES:DI, AL
+    XCHG [SI], AL
+    
+    INC SI
+    INC DI
+    LOOP SWAP
+
+CODE ENDS
+END START
 \end{minted}
 \end{multicols}
 
 \subsection*{Output}
 \begin{center}
     \centering
-    % \includegraphics[width = .4\textwidth]{sentRev.png}
-    \captionof{figure}{Hexadecimal input \& output}
+    \includegraphics[width = \textwidth]{befcs.png}
+    \captionof{figure}{Code segment before swap.}
+    \centering
+    \includegraphics[width = \textwidth]{befes.png}
+    \captionof{figure}{Extra Segment before swap.}
+    \centering
+    \includegraphics[width = \textwidth]{afcs.png}
+    \captionof{figure}{Code segment after swap.}
+    \centering
+    \includegraphics[width = \textwidth]{afes.png}
+    \captionof{figure}{Extra segment after swap.}
 \end{center}
 
 
